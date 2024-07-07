@@ -1,4 +1,4 @@
-#import streamlit as st
+import streamlit as st
 import pathlib
 from PIL import Image
 import google.generativeai as genai
@@ -43,6 +43,11 @@ install_requirements("requirements.txt")  #
 API_KEY = 'AIzaSyBpxyNMnfcnq2MZ6NhPj_T9sn_qwYSEHK8'
 project_id = "powerful-star-422214-r6"
 genai.configure(api_key=API_KEY)
+
+# Set the environment variable immediately (make sure the path is correct)
+project_id = "powerful-star-422214-r6"  # Replace with your project ID
+vertexai.init(project=project_id, location="us-central1")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "project_key.json"
 
 # Generation configuration
 generation_config = {
@@ -95,11 +100,6 @@ def main():
         "Enter your analysis prompt:",
         "tell me some insights about how to increase tourism in Japanese",
     )
-
-    # Vertex AI Model Setup
-    project_id = "powerful-star-422214-r6"  # Replace with your project ID
-    vertexai.init(project=project_id, location="us-central1")
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "project_key.json"
 
     model = GenerativeModel(model_name="gemini-1.5-pro")
     chat = model.start_chat()
