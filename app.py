@@ -80,7 +80,7 @@ chat_session = model.start_chat(history=[])
 
 # Streamlit app
 def main():
-    image_path = "/workspaces/streamlit-fukui/fukui.jpg"
+    image_path = "fukui.jpg"
     with open(image_path, "rb") as f:
         image_data = f.read()
     img = Image.open(io.BytesIO(image_data))
@@ -99,7 +99,7 @@ def main():
     # Vertex AI Model Setup
     project_id = "powerful-star-422214-r6"  # Replace with your project ID
     vertexai.init(project=project_id, location="us-central1")
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/workspaces/streamlit-fukui/project_key.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "project_key.json"
 
     model = GenerativeModel(model_name="gemini-1.5-pro")
     chat = model.start_chat()
