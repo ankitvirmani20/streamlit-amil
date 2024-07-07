@@ -10,6 +10,34 @@ from datetime import datetime
 from pathlib import Path
 import os
 import io
+import subprocess
+
+def install_requirements(file_path="requirements.txt"):
+    """
+    Installs Python packages listed in the specified requirements file.
+    """
+
+    try:
+        result = subprocess.run(
+            ["pip", "install", "-r", file_path],
+            capture_output=True,
+            text=True,
+            check=True  # Raise an exception if pip fails
+        )
+
+        print("Installation successful!")
+        print(result.stdout)  # Print pip's output for details
+
+    except subprocess.CalledProcessError as e:
+        print("Error during installation:")
+        print(e.stderr)  # Show pip's error messages
+
+    except FileNotFoundError:
+        print(f"Error: Requirements file '{file_path}' not found.")
+
+# Example usage:
+install_requirements()  # Uses the default "requirements.txt"
+install_requirements("requirements.txt")  #
 
 # Configure the API key directly in the script
 API_KEY = 'AIzaSyBpxyNMnfcnq2MZ6NhPj_T9sn_qwYSEHK8'
