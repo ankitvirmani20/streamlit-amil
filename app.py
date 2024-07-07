@@ -111,9 +111,7 @@ def main():
         for chunk in responses:
             text_response.append(chunk.text)
         return "".join(text_response)
-
-    # Load Data
-    data_folder = Path("/workspaces/streamlit-fukui/") 
+        
     try:
 
         # Prompt Generation (Adapted for Gemini and Streamlit Input)
