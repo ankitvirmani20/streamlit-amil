@@ -47,7 +47,17 @@ genai.configure(api_key=API_KEY)
 # Set the environment variable immediately (make sure the path is correct)
 project_id = "powerful-star-422214-r6"  # Replace with your project ID
 vertexai.init(project=project_id, location="us-central1")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "project_key.json"
+
+key_file_json = st.secrets["gcp_key_file_path"]
+key_data = json.loads(key_file_json)
+
+# Set temporary file path
+temp_key_path = 'temp_key.json'
+with open(temp_key_path, 'w') as f:
+    json.dump(key_data, f)
+
+# Set Environment Variable
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_key_path
 
 # Generation configuration
 generation_config = {
